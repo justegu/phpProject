@@ -24,12 +24,12 @@ $router->process($requestUri, $requestMethod, $_POST);
 //3. Projekte turetu buti naudojamas COMPOSER’is (autoloader, logger, smarty)
 //4. Projektas turi buti pajungtas prie Duomenu Bazes (Database Name: task_project. Joje turetu buti sukurta lentele “task” [id, created_at, updated_at, name, description, status, active]);
 //- Endpoints:
-//    - /task-project/list - isvedamas visu turimu task’u listas.
+//- /task-project/list - isvedamas visu turimu task’u listas.
 //- /task-project/create - forma naujo tasko sukurimui.
 //- /task-project/store - saugojimas naujo tasko i duomenu baze.
 //- /task-project/delete/id - tasko istrinimas
-//    - /task-project/edit/id - atsidaro forma su tasko informacija, kur galima redaguoti taska
-//    - /task-project/update/id - paupdatina tasko info DB
-//    - /task-project/mark-as-completed - pakeicia tasko statusa i completed. [Jei reikalingas]
+//- /task-project/edit/id - atsidaro forma su tasko informacija, kur galima redaguoti taska
+//- /task-project/update/id - paupdatina tasko info DB
+//- /task-project/mark-as-completed - pakeicia tasko statusa i completed. [Jei reikalingas]
 //5. Padaryti atvaizdavimu reikalingu elementu (forma, task’u lentele ir t.t).
 //6. Sukurti README.md faila ir i ji trumpai aprasyti kaip veikia projektas ir kas yra padaryta.

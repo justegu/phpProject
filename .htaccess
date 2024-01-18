@@ -1,8 +1,8 @@
 RewriteEngine On
 #Use yours folder name
-RewriteBase /Paskaitos/car-project-main/car-project-main
+RewriteBase /Paskaitos/todo_app
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 #Use yours folder name
-RewriteRule . /Paskaitos/car-project-main/car-project-main/index.php [L]
+RewriteRule . /Paskaitos/todo_app/index.php [L]

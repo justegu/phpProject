@@ -4,7 +4,8 @@
     "require": {
         "monolog/monolog": "^3.5",
         "ext-pdo": "*",
-        "smarty/smarty": "^4.3"
+        "smarty/smarty": "^4.3",
+      "ext-mongodb": "*"
     },
     "require-dev": {
         "symfony/var-dumper": "^7.0"

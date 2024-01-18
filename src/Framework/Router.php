@@ -32,10 +32,37 @@ class Router
             case '/create':
                 $this->taskController->create();
                 break;
+            case strpos($route, '/delete/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->delete($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/edit/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->edit($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/update/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->update($id, $_POST);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case '/mark-as-completed':
+//                $this->taskController->;
+//                break;
             default:
-                $taskNumber = $this->getTaskNumberFromRoute($route);
-                if (null !== $taskNumber) {
-                    $this->taskController->details($taskNumber);
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->details($id);
                 } else {
                     $this->pageNotFoundController->index();
                 }
@@ -43,20 +70,13 @@ class Router
         }
     }
 
-    private function getTaskNumberFromRoute(string $route): ?string
+    private function getTaskId(string $route): ?string
     {
-        if(strpos($route,"/" ) !== false){
+        $parts = explode('/', $route);
+        $taskId = end($parts);
 
-            $result = str_replace('/' , "" , $route);
-
-            if (!$result) {
-                $result = null;
-            }
-
-        } else {
-            $result = null;
-        }
-
-        return $result;
+        return ($taskId !== false && $taskId !== 'task') ? $taskId : null;
     }
+
+
 }

@@ -4,20 +4,23 @@ declare(strict_types = 1);
 
 namespace Juste\TodoApp\Models;
 
+
+use DateTimeImmutable;
+
 class Task
 {
     public function __construct(
-        private string $id,
+        private int $id,
         private string $task_name,
         private string $task_description,
-        private \DateTimeImmutable $created_at,
-        private \DateTimeImmutable $updated_at,
+        private ?DateTimeImmutable $created_at,
+        private ?DateTimeImmutable  $updated_at,
         private bool $status,
         private bool $active
     ) {
     }
 
-    public function getTaskId(): string
+    public function getTaskId(): int
     {
         return $this->id;
     }
@@ -32,12 +35,12 @@ class Task
         return $this->task_description;
     }
 
-    public function getCreatedAt(): \DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function getUpdatedAt(): \DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
     }

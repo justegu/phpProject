@@ -20,9 +20,6 @@ class Router
     public function process(string $route, string $requestMethod, array $requestData): void
     {
         switch ($route) {
-            case '/':
-                $this->homePageController->index();
-                break;
             case '/list':
                 $this->taskController->list();
                 break;
@@ -56,16 +53,48 @@ class Router
                     $this->pageNotFoundController->index();
                 }
                 break;
-            case '/mark-as-completed':
-//                $this->taskController->;
-//                break;
-            default:
+            case strpos($route, '/mark-as-completed/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->toggleMarkAsCompleted($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/active/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->toggleActive($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/task/mark-as-completed/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->taskPageToggleMarkAsCompleted($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/task/active/') === 0:
+                $id = $this->getTaskId($route);
+                if ($id !== null) {
+                    $this->taskController->taskPageToggleActive($id);
+                } else {
+                    $this->pageNotFoundController->index();
+                }
+                break;
+            case strpos($route, '/task/') === 0:
                 $id = $this->getTaskId($route);
                 if ($id !== null) {
                     $this->taskController->details($id);
                 } else {
                     $this->pageNotFoundController->index();
                 }
+                break;
+            default:
+                $this->homePageController->index();
                 break;
         }
     }

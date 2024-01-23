@@ -30,7 +30,7 @@ class TaskController
         $task = $this->taskRepository->findTaskById($id);
 
         if(!$task){
-            dd('Task not found');
+            dd('Task not found'); // Geriau butu krauti TaskNotFound.tpl smarty.
         }
         $this->smarty->assign('task', $task);
         $this->smarty->display('./src/Views/Task.tpl');
@@ -41,22 +41,22 @@ class TaskController
     {
         // Validation
         if(!$taskData){
-            throw new \Exception('Data empty');
+            throw new \Exception('Data empty'); // Galima butu loggeri papildomai panaudoti.
         }
 
-        $createdAt = isset($taskData['created_at']) && $taskData['created_at'] !== null
+        $createdAt = isset($taskData['created_at']) && $taskData['created_at'] !== null // The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL
             ? new DateTimeImmutable($taskData['created_at'])
             : null;
 
-        $updatedAt = isset($taskData['updated_at']) && $taskData['updated_at'] !== null
+        $updatedAt = isset($taskData['updated_at']) && $taskData['updated_at'] !== null // The isset() function checks whether a variable is set, which means that it has to be declared and is not NULL
             ? new DateTimeImmutable($taskData['updated_at'])
             : null;
 
         $status = $_POST['status'] ?? 'not_completed';
         $active = $_POST['active'] ?? 'not_active';
 
-        $statusBool = $status === 'completed' ? true : false;
-        $activeBool = $active === 'active' ? true : false;
+        $statusBool = $status === 'completed' ? true : false; //Galime tpl sita patikrinima daryti
+        $activeBool = $active === 'active' ? true : false; // Galima tpl sita patikrinima daryti
 
         $task = new Task(
             (int)($taskData['id'] ?? 0),
@@ -71,6 +71,7 @@ class TaskController
             $this->taskRepository->createTask($task);
             header('Location: /Paskaitos/todo_app/list');
         } else {
+            // Exception should be here.
             dd('Failed to create task');
         }
     }
@@ -87,6 +88,7 @@ class TaskController
         if ($success) {
             header('Location: /Paskaitos/todo_app/list');
         } else {
+            // Exception should be here
             dd('Failed to delete task');
         }
     }
@@ -96,6 +98,7 @@ class TaskController
         $task = $this->taskRepository->findTaskById($id);
 
         if (!$task) {
+            // Galima arba exception arba per smarty i page not found nukelti.
             dd('Task not found');
         }
 
@@ -187,6 +190,6 @@ class TaskController
 
         header('Location: /Paskaitos/todo_app/list');
     }
-
+    // Vengti nereikalingu tarpu.
 
 }
